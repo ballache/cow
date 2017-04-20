@@ -67,6 +67,7 @@ type Config struct {
 	dir         string // directory containing config file
 	StatFile    string // Path for stat file
 	BlockedFile string // blocked sites specified by user
+	BlockFile   string // user block sites
 	DirectFile  string // direct sites specified by user
 
 	// not configurable in config file
@@ -88,6 +89,7 @@ func printVersion() {
 func initConfig(rcFile string) {
 	config.dir = path.Dir(rcFile)
 	config.BlockedFile = path.Join(config.dir, blockedFname)
+	config.BlockFile = path.Join(config.dir, blockFname)
 	config.DirectFile = path.Join(config.dir, directFname)
 	config.StatFile = path.Join(config.dir, statFname)
 

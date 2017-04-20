@@ -474,6 +474,13 @@ func (c *clientConn) serve() {
 		}
 		dbgPrintRq(c, &r)
 
+		siteInfo := siteStat.GetVisitCnt(r.URL)
+		if siteInfo.AlwaysBlock() {
+			debug.Printf("cli %s access block domain %s", c.RemoteAddr(), r.URL.Domain)
+			sendErrorPage(c, "403 Forbidden", "Blocked domain", "cow blocked this site, please contact admin.")
+			return
+		}
+
 		// PAC may leak frequently visited sites information. But if cow
 		// requires authentication for PAC, some clients may not be able
 		// handle it. (e.g. Proxy SwitchySharp extension on Chrome.)

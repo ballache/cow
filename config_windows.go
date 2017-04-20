@@ -8,6 +8,7 @@ import (
 const (
 	rcFname      = "rc.txt"
 	blockedFname = "blocked.txt"
+	blockFname   = "block.txt"
 	directFname  = "direct.txt"
 	statFname    = "stat.txt"
 

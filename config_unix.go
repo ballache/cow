@@ -9,6 +9,7 @@ import (
 const (
 	rcFname      = "rc"
 	blockedFname = "blocked"
+	blockFname   = "block"
 	directFname  = "direct"
 	statFname    = "stat"
 
