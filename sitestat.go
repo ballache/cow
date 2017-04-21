@@ -113,6 +113,10 @@ func (vc *VisitCnt) AlwaysBlocked() bool {
 	return vc.Blocked == userCnt
 }
 
+func (vc *VisitCnt) AlwaysBlock() bool {
+	return vc.Direct == userCnt && vc.Blocked == userCnt
+}
+
 func (vc *VisitCnt) OnceBlocked() bool {
 	return vc.Blocked > 0 || vc.AlwaysBlocked() || vc.AsTempBlocked()
 }
@@ -328,6 +332,9 @@ func (ss *SiteStat) loadUserList() {
 	}
 	if blockedList, err := loadSiteList(config.BlockedFile); err == nil {
 		ss.loadList(blockedList, 0, userCnt)
+	}
+	if blockList, err := loadSiteList(config.BlockFile); err == nil {
+		ss.loadList(blockList, userCnt, userCnt)
 	}
 }
 
